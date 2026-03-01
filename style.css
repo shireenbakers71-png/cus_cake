@@ -835,7 +835,8 @@ img {
 
 .custom-category-page .cake-img {
     width: 100%;
-    height: 330px;
+    aspect-ratio: 1 / 1;
+    height: auto;
     object-fit: contain;
     padding: 15px;
     background-color: #fdfdfd;
@@ -858,7 +859,6 @@ img {
     }
 
     .custom-category-page .cake-img {
-        height: 250px;
         padding: 10px;
     }
 
@@ -869,7 +869,6 @@ img {
 
 @media (max-width: 576px) {
     .custom-category-page .cake-img {
-        height: 140px;
         padding: 6px;
     }
 
