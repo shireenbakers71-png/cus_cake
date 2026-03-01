@@ -915,13 +915,13 @@ img {
     font-family: 'Montserrat', Arial, sans-serif;
     font-weight: bold;
     font-size: 1.2em;
-    color: #6c6c6c;
+    color: #6c6c6c !important; /* Force gray, overriding .logo span */
     letter-spacing: 2px;
     line-height: 1;
 }
 
 .index-logo-text span {
-    color: #f7c873;
+    color: #f7c873 !important; /* Keep BAKERS yellow */
 }
 
 @media (min-width: 769px) {
@@ -1928,6 +1928,4 @@ img {
         /* Still 3 columns */
         gap: 8px;
     }
-}. s e a r c h - i t e m : h o v e r   {   b a c k g r o u n d - c o l o r :   # f 9 f 9 f 9 ;   } 
- 
- 
+}
