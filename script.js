@@ -1,71 +1,70 @@
 // Category search functionality for header
-const categories = [
-    "Birthday cakes",
-    "Popsicle Cakes",
-    "Cartoon Cakes",
-    "Marvel Cakes",
-    "Umrah / Hajj Cakes",
-    "Anniversary cakes",
-    "Wedding cakes",
-    "Sorry Cakes",
-    "Career/Profession Cakes",
-    "Gaming Theme Cake",
-    "Trending Cakes",
-    "Father day cakes",
-    "Mother day cakes",
-    "Independence Day cakes",
-    "Christmas Cakes",
-    "Defense Day Cakes",
-    "Valentines Day cakes",
-    "Eid Cakes",
-    "Love Cakes",
-    "Prank Cakes",
-    "Picture Cakes",
-    "Fire Cakes",
-    "Jashn e Ali Cakes",
-    "Bride to be Cakes",
-    "Nikkah Cakes",
-    "Mayyu/Dholki Cakes",
-    "Picture Selected Cakes (with png or jpg uploaded)",
-    "Graduation Cakes",
-    "Heart Shaped Cakes",
-    "Goth/Halloween Cakes"
-];
-
 const searchInput = document.getElementById('categorySearch');
 const searchResults = document.getElementById('searchResults');
+let dynamicCategories = [];
 
-if (searchInput) {
-    searchInput.addEventListener('input', function() {
-        const query = this.value.toLowerCase();
-        if (query.length === 0) {
-            searchResults.style.display = 'none';
-            searchResults.innerHTML = '';
-            return;
-        }
-        const matches = categories.filter(cat => cat.toLowerCase().includes(query));
-        if (matches.length > 0) {
-            searchResults.innerHTML = matches.map(cat => `<div class='search-item' style='padding:8px; cursor:pointer;'>${cat}</div>`).join('');
-            searchResults.style.display = 'block';
-        } else {
-            searchResults.innerHTML = `<div style='padding:8px; color:#888;'>No results found</div>`;
-            searchResults.style.display = 'block';
+document.addEventListener('DOMContentLoaded', () => {
+    // Collect specific images, links and titles from categories dynamically
+    const cards = document.querySelectorAll('.category-minimal');
+    cards.forEach(card => {
+        const titleEl = card.querySelector('.minimal-title');
+        const imgEl = card.querySelector('img');
+        const href = card.getAttribute('href');
+        
+        if (titleEl && imgEl && href && href !== '#') {
+            dynamicCategories.push({
+                title: titleEl.textContent.trim(),
+                image: imgEl.getAttribute('src'),
+                link: href
+            });
         }
     });
 
-    searchResults.addEventListener('mousedown', function(e) {
-        if (e.target.classList.contains('search-item')) {
-            searchInput.value = e.target.textContent;
-            searchResults.style.display = 'none';
-        }
-    });
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            if (query.length === 0) {
+                searchResults.style.display = 'none';
+                searchResults.innerHTML = '';
+                return;
+            }
 
-    document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.style.display = 'none';
-        }
-    });
-}
+            // Find matching categories and assign an index (-1 is non-match, 0 is starts with, >0 is contains)
+            const matches = dynamicCategories.map(cat => {
+                const titleLower = cat.title.toLowerCase();
+                const index = titleLower.indexOf(query);
+                return { ...cat, matchIndex: index };
+            }).filter(item => item.matchIndex !== -1);
+
+            // Sort so items starting with alphabet queried appear FIRST
+            matches.sort((a, b) => {
+                if (a.matchIndex === 0 && b.matchIndex !== 0) return -1;
+                if (b.matchIndex === 0 && a.matchIndex !== 0) return 1;
+                return a.matchIndex - b.matchIndex;
+            });
+
+            if (matches.length > 0) {
+                searchResults.innerHTML = matches.map(cat => `
+                    <a href="${cat.link}" class="search-item" style="display: flex; align-items: center; padding: 10px; text-decoration: none; color: #333; border-bottom: 1px solid #f0f0f0; transition: background 0.2s;">
+                        <img src="${cat.image}" alt="${cat.title}" style="width: 40px; height: 40px; object-fit: contain; border-radius: 6px; margin-right: 12px; background: #fff; border: 1px solid #eee;">
+                        <span style="font-weight: 600; font-size: 0.9rem;">${cat.title}</span>
+                    </a>
+                `).join('');
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.innerHTML = `<div style="padding: 12px; color: #888; text-align: center; font-size: 0.9rem;">No categories found</div>`;
+                searchResults.style.display = 'block';
+            }
+        });
+
+        // Hide results if we click outside the search box
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+    }
+});
 /* Shireen Bakers Functionality */
 
 // PROFESSIONAL SECURITY DETERRENCE
