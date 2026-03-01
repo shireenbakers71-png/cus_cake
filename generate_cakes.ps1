@@ -33,11 +33,17 @@ Get-CakeHtml -TitleCase 'Marvel' -UpperTitle 'MARVEL' -FolderName 'marvel_cakes'
 Get-CakeHtml -TitleCase 'Popsicle' -UpperTitle 'POPSICLE' -FolderName 'popsi_cakes' -OutputName 'popsicle-cakes.html'
 
 # Newly added categories
-Get-CakeHtml -TitleCase 'Nikkah' -UpperTitle 'NIKKAH' -FolderName 'nikkah cake' -OutputName 'nikkah-cakes.html'
+Get-CakeHtml -TitleCase 'Nikkah/Wedding' -UpperTitle 'NIKKAH/WEDDING' -FolderName 'nikkah cake' -OutputName 'nikkah-cakes.html'
 Get-CakeHtml -TitleCase 'Graduation' -UpperTitle 'GRADUATION' -FolderName 'graduation cake' -OutputName 'graduation-cakes.html'
 Get-CakeHtml -TitleCase 'Eid' -UpperTitle 'EID' -FolderName 'eid cake' -OutputName 'eid-cakes.html'
 Get-CakeHtml -TitleCase 'Picture' -UpperTitle 'PICTURE' -FolderName 'picture cake' -OutputName 'picture-cakes.html'
-Get-CakeHtml -TitleCase 'Valentine' -UpperTitle 'VALENTINE' -FolderName 'valentine cake' -OutputName 'valentines-day-cakes.html'
+Get-CakeHtml -TitleCase 'Valentine/Love' -UpperTitle 'VALENTINE/LOVE' -FolderName 'valentine cake' -OutputName 'valentines-day-cakes.html'
 Get-CakeHtml -TitleCase 'Mayyun Dholki' -UpperTitle 'MAYYUN DHOLKI' -FolderName 'mayyun dholki cake' -OutputName 'mayyu-dholki-cakes.html'
 Get-CakeHtml -TitleCase 'Bride To Be' -UpperTitle 'BRIDE TO BE' -FolderName 'bride to be' -OutputName 'bride-to-be-cakes.html'
 
+Get-CakeHtml -TitleCase 'Heart Shaped' -UpperTitle 'HEART SHAPED' -FolderName 'heartshape cake' -OutputName 'heart-shaped-cakes.html'
+Get-CakeHtml -TitleCase 'Goth/Halloween' -UpperTitle 'GOTH/HALLOWEEN' -FolderName 'hallowen cake' -OutputName 'goth-halloween-cakes.html'
+
+Get-CakeHtml -TitleCase 'Jashn-e-Ali' -UpperTitle 'JASHN-E-ALI' -FolderName 'jashan_e_ali' -OutputName 'jashn-e-ali-cakes.html'
+Get-CakeHtml -TitleCase 'Prank' -UpperTitle 'PRANK' -FolderName 'prank cake' -OutputName 'prank-cakes.html'
+Get-CakeHtml -TitleCase 'Fire' -UpperTitle 'FIRE' -FolderName 'fire cake' -OutputName 'fire-cakes.html'
