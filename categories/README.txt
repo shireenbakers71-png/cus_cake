@@ -1,0 +1,1 @@
+This folder contains one HTML page per category. Each page is a simple placeholder that displays "hiiii" and a link back to the main index.html.
