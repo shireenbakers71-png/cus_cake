@@ -867,6 +867,128 @@ img {
     }
 }
 
+@media (max-width: 576px) {
+    .custom-category-page .cake-img {
+        height: 140px;
+        padding: 6px;
+    }
+
+    .custom-category-page .cake-body {
+        padding: 10px;
+    }
+
+    .custom-category-page .form-label {
+        font-size: 0.85rem;
+    }
+
+    .custom-category-page .form-select,
+    .custom-category-page input[type="number"] {
+        font-size: 0.85rem;
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+    }
+
+    .custom-category-page .price-display {
+        font-size: 1rem;
+    }
+}
+
+/* ================================
+   Index Header (Mobile)
+================================ */
+
+.index-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    gap: 14px;
+}
+
+.index-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.index-logo-text {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #6c6c6c;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.index-logo-text span {
+    color: #f7c873;
+}
+
+@media (min-width: 769px) {
+    .index-header .header-logo-img,
+    .custom-category-header .header-logo-img {
+        height: 60px;
+    }
+}
+
+.index-search {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+}
+
+.index-search #categorySearch {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1.1em;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.index-search #searchResults {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 0 0 6px 6px;
+    z-index: 10;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .index-header-inner {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .index-logo {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .index-logo-text {
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+        text-align: center;
+    }
+
+    .index-search {
+        max-width: 320px;
+        margin-left: 0;
+    }
+
+    .index-search #categorySearch {
+        font-size: 1rem;
+        padding: 8px 10px;
+    }
+}
+
 .hero-slide {
     position: absolute;
     top: 0;

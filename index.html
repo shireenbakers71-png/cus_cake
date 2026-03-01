@@ -102,19 +102,18 @@
 
 
   <!-- 1. Header -->
-  <header class="header">
-    <div class="container header-grid" style="display: flex; align-items: center; justify-content: flex-start; padding: 10px 0;">
+  <header class="header index-header">
+    <div class="container index-header-inner">
       <!-- Logo -->
-      <a href="index.html" class="logo" style="display: flex; align-items: center; text-decoration: none;">
-        <img src="images/logo_transparent.webp" alt="Shireen Bakers Logo" class="header-logo-img" style="height: 60px; margin-right: 10px;">
-        <span style="font-family: 'Montserrat', Arial, sans-serif; font-weight: bold; font-size: 1.2em; color: #6c6c6c; letter-spacing: 2px;">
-          SHIREEN <span style="color: #f7c873;">BAKERS</span>
-        </span>
+      <a href="index.html" class="logo index-logo">
+        <img src="images/logo_transparent.webp" alt="Shireen Bakers Logo" class="header-logo-img">
+        <span class="index-logo-text">SHIREEN <span>BAKERS</span></span>
       </a>
+
       <!-- Search Bar -->
-      <div style="margin-left: auto; max-width: 400px; position: relative;">
-        <input type="text" id="categorySearch" placeholder="Search categories..." style="width: 100%; padding: 10px 12px; font-size: 1.1em; border-radius: 6px; border: 1px solid #ccc;">
-        <div id="searchResults" style="position: absolute; top: 42px; left: 0; right: 0; background: #fff; border: 1px solid #eee; border-radius: 0 0 6px 6px; z-index: 10; display: none;"></div>
+      <div class="index-search">
+        <input type="text" id="categorySearch" placeholder="Search categories...">
+        <div id="searchResults"></div>
       </div>
     </div>
   </header>
