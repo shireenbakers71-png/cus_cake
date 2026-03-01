@@ -1326,7 +1326,21 @@ img {
         justify-content: center;
         align-items: center;
         margin-bottom: 30px;
-        gap: 20px;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .footer-socials {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .social-circle {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
     }
 
     .footer-logo {
