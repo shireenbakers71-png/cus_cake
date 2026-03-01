@@ -777,6 +777,96 @@ img {
     position: relative;
 }
 
+/* ================================
+   Custom Category Pages (Mobile)
+   Used by categories/* that show
+   the custom cakes image grid.
+================================ */
+
+.custom-category-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 0;
+}
+
+.custom-category-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    justify-content: flex-start;
+}
+
+.custom-category-logo-text {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #6c6c6c;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.custom-category-logo-text span {
+    color: #f7c873;
+}
+
+.custom-category-page .top-bar {
+    margin-bottom: 18px;
+}
+
+.custom-category-page .page-title {
+    font-weight: bold;
+    color: #6c6c6c;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.custom-category-page .page-title span {
+    color: #f7c873;
+}
+
+.custom-category-page .cake-card {
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.custom-category-page .cake-img {
+    width: 100%;
+    height: 330px;
+    object-fit: contain;
+    padding: 15px;
+    background-color: #fdfdfd;
+}
+
+.custom-category-page .cake-body {
+    padding: 18px;
+    background-color: #fafafa;
+}
+
+@media (max-width: 768px) {
+    .custom-category-logo-text {
+        font-size: 1em;
+        letter-spacing: 1.5px;
+    }
+
+    .custom-category-page .page-title {
+        font-size: 1.25rem;
+        letter-spacing: 1.5px;
+    }
+
+    .custom-category-page .cake-img {
+        height: 250px;
+        padding: 10px;
+    }
+
+    .custom-category-page .cake-body {
+        padding: 14px;
+    }
+}
+
 .hero-slide {
     position: absolute;
     top: 0;
