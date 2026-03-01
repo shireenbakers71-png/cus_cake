@@ -31,11 +31,11 @@ async function processImage(filePath, outputDir) {
 
         const outputPath = path.join(finalOutputDir, `${fileName}.webp`);
 
-        // Use Sharp to resize to 400x400 (cropping to fit exactly), convert to webp, and compress
+        // Use Sharp to resize to 400x400 (fitting fully inside without cropping)
         await sharp(filePath)
             .resize(targetSize, targetSize, {
-                fit: sharp.fit.cover, // Crop uniformly to fit 400x400 exactly
-                position: sharp.strategy.entropy // Focus on the most interesting part of the image
+                fit: sharp.fit.contain, // Fit the whole image inside the box
+                background: { r: 255, g: 255, b: 255, alpha: 1 } // Add white padding where it doesn't fit perfectly
             })
             .webp({ quality: compressionQuality })
             .toFile(outputPath);
@@ -72,5 +72,23 @@ function walkDirAndProcess(dir) {
 }
 
 console.log('Starting image processing...');
-walkDirAndProcess(inputDir);
+const targetFolders = process.argv.slice(2);
+
+if (targetFolders.length > 0) {
+    for (const folder of targetFolders) {
+        const targetPath = path.join(inputDir, folder);
+        if (!fs.existsSync(targetPath)) {
+            console.warn(`⚠️  Skipping missing folder: ${path.relative(__dirname, targetPath)}`);
+            continue;
+        }
+        const stat = fs.statSync(targetPath);
+        if (!stat.isDirectory()) {
+            console.warn(`⚠️  Skipping non-folder: ${path.relative(__dirname, targetPath)}`);
+            continue;
+        }
+        walkDirAndProcess(targetPath);
+    }
+} else {
+    walkDirAndProcess(inputDir);
+}
 console.log('Processing queued! Wait for all ✅ messages to complete.');

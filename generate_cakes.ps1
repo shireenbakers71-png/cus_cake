@@ -1,10 +1,10 @@
-$templatePath = 'c:\Users\PC\Desktop\cus_cake\categories\birthday-cakes.html'
+﻿$templatePath = 'c:\Users\PC\Desktop\cus_cake\categories\birthday-cakes.html'
 $htmlContent = Get-Content -Raw -Path $templatePath
 
 function Get-CakeHtml {
     param($TitleCase, $UpperTitle, $FolderName, $OutputName)
     $images = Get-ChildItem -Filter *.webp "c:\Users\PC\Desktop\cus_cake\images\$FolderName" | Select-Object -ExpandProperty Name
-    $jsonArray = ($images | ConvertTo-Json -Compress) -join ''
+    $jsonArray = if ($images -and $images.Count -gt 0) { ($images | ConvertTo-Json -Compress) -join '' } else { "[]" }
     # If the array has only 1 element
     if ($images.Count -eq 1) { $jsonArray = "`["" + $images[0] + ""`]" }
     
@@ -31,3 +31,13 @@ function Get-CakeHtml {
 Get-CakeHtml -TitleCase 'Cartoon' -UpperTitle 'CARTOON' -FolderName 'cartoon_cakes' -OutputName 'cartoon-cakes.html'
 Get-CakeHtml -TitleCase 'Marvel' -UpperTitle 'MARVEL' -FolderName 'marvel_cakes' -OutputName 'marvel-cakes.html'
 Get-CakeHtml -TitleCase 'Popsicle' -UpperTitle 'POPSICLE' -FolderName 'popsi_cakes' -OutputName 'popsicle-cakes.html'
+
+# Newly added categories
+Get-CakeHtml -TitleCase 'Nikkah' -UpperTitle 'NIKKAH' -FolderName 'nikkah cake' -OutputName 'nikkah-cakes.html'
+Get-CakeHtml -TitleCase 'Graduation' -UpperTitle 'GRADUATION' -FolderName 'graduation cake' -OutputName 'graduation-cakes.html'
+Get-CakeHtml -TitleCase 'Eid' -UpperTitle 'EID' -FolderName 'eid cake' -OutputName 'eid-cakes.html'
+Get-CakeHtml -TitleCase 'Picture' -UpperTitle 'PICTURE' -FolderName 'picture cake' -OutputName 'picture-cakes.html'
+Get-CakeHtml -TitleCase 'Valentine' -UpperTitle 'VALENTINE' -FolderName 'valentine cake' -OutputName 'valentines-day-cakes.html'
+Get-CakeHtml -TitleCase 'Mayyun Dholki' -UpperTitle 'MAYYUN DHOLKI' -FolderName 'mayyun dholki cake' -OutputName 'mayyu-dholki-cakes.html'
+Get-CakeHtml -TitleCase 'Bride To Be' -UpperTitle 'BRIDE TO BE' -FolderName 'bride to be' -OutputName 'bride-to-be-cakes.html'
+
