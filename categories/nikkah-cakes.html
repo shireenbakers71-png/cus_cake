@@ -104,7 +104,7 @@
       priceDisplay.textContent = price > 0 ? `Rs. ${price.toLocaleString()}` : 'Rs. 0';
     }
 
-                function openWhatsApp(btn, event) {
+                    function openWhatsApp(btn, event) {
       event.preventDefault();
       var cardBody = btn.closest('.cake-body');
       var sel = cardBody.querySelector('.weight-select');
@@ -120,12 +120,15 @@
       var cakeType = '';
       var titleEl = document.querySelector('.page-title');
       if (titleEl) cakeType = titleEl.textContent.trim().replace(/\s+/g, ' ');
+      var imgEl = btn.closest('.cake-card').querySelector('.cake-img');
+      var imgLink = imgEl ? imgEl.src : '';
 
       var msg = 'Hi Shireen Bakers!' + '\n\n' +
         'I would like to order this cake:' + '\n' +
         '*Category*: ' + cakeType + '\n' +
         '*Weight*: ' + weight + '\n' +
         '*Price*: ' + price + '\n\n' +
+        '*Cake Image*: ' + imgLink + '\n\n' +
         'Please confirm availability and delivery.';
 
       window.location.href = 'https://wa.me/923288521441?text=' + encodeURIComponent(msg);
