@@ -104,7 +104,7 @@
       priceDisplay.textContent = price > 0 ? `Rs. ${price.toLocaleString()}` : 'Rs. 0';
     }
 
-            function openWhatsApp(btn, event) {
+                function openWhatsApp(btn, event) {
       event.preventDefault();
       var cardBody = btn.closest('.cake-body');
       var sel = cardBody.querySelector('.weight-select');
@@ -120,7 +120,6 @@
       var cakeType = '';
       var titleEl = document.querySelector('.page-title');
       if (titleEl) cakeType = titleEl.textContent.trim().replace(/\s+/g, ' ');
-      var imgEl = btn.closest('.cake-card').querySelector('.cake-img');
 
       var msg = 'Hi Shireen Bakers!' + '\n\n' +
         'I would like to order this cake:' + '\n' +
@@ -129,40 +128,7 @@
         '*Price*: ' + price + '\n\n' +
         'Please confirm availability and delivery.';
 
-      // Convert the already-loaded image to a blob via Canvas
-      function imgToBlob(img, cb) {
-        try {
-          var canvas = document.createElement('canvas');
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          var ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-          canvas.toBlob(function(blob) { cb(blob); }, 'image/png');
-        } catch(e) { cb(null); }
-      }
-
-      function fallback() {
-        window.open('https://wa.me/923288521441?text=' + encodeURIComponent(msg), '_blank');
-      }
-
-      // Try native share with image (works on mobile)
-      if (imgEl && navigator.share) {
-        imgToBlob(imgEl, function(blob) {
-          if (blob) {
-            var file = new File([blob], 'cake.png', { type: 'image/png' });
-            var shareData = { text: msg, files: [file] };
-            if (navigator.canShare && navigator.canShare(shareData)) {
-              navigator.share(shareData).catch(fallback);
-            } else {
-              fallback();
-            }
-          } else {
-            fallback();
-          }
-        });
-      } else {
-        fallback();
-      }
+      window.location.href = 'https://wa.me/923288521441?text=' + encodeURIComponent(msg);
     }
   </script>
 
