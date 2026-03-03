@@ -35,7 +35,7 @@
     const imageFiles = ["PhotoshopExtension_Image (1).webp","PhotoshopExtension_Image (10).webp","PhotoshopExtension_Image (11).webp","PhotoshopExtension_Image (2).webp","PhotoshopExtension_Image (3).webp","PhotoshopExtension_Image (4).webp","PhotoshopExtension_Image (5).webp","PhotoshopExtension_Image (7).webp","PhotoshopExtension_Image (8).webp","PhotoshopExtension_Image (9).webp","PhotoshopExtension_Image.webp"];;
 
     const container = document.getElementById('cakes-container');
-    const ratePerPound = 1500;
+    const baseRates = { 'Pineapple': 995, 'Chocolate': 1245, 'Red Velvet': 1495, '2 in 1 (Choc + Pine)': 1145, 'Custom': 1495 };
 
     imageFiles.forEach((file) => {
       const col = document.createElement('div');
@@ -55,10 +55,19 @@
               <div class="custom-weight-container mt-2" style="display: none;">
                 <input type="number" class="form-control custom-weight-input" placeholder="Enter lbs (e.g., 3)" min="0.5" step="0.5">
               </div>
-            </div>
-            <div class="mt-auto d-flex justify-content-between align-items-center pt-3" style="border-top: 1px dashed #ddd;">
+              <div class="mb-3">
+                <label class="form-label" style="color: #6c6c6c; font-weight: 600;">Select Base:</label>
+                <select class="form-select base-select">
+                  <option value="Pineapple">Pineapple</option>
+                  <option value="Chocolate" selected>Chocolate</option>
+                  <option value="Red Velvet">Red Velvet</option>
+                  <option value="2 in 1 (Choc + Pine)">2 in 1 (Choc + Pine)</option>
+                  <option value="Custom">Custom</option>
+                </select>
+              </div>
+              <div class="mt-auto d-flex justify-content-between align-items-center pt-3" style="border-top: 1px dashed #ddd;">
               <span style="color: #6c6c6c; font-size: 1em; font-weight: 600;">Price:</span>
-              <h5 class="price-display m-0" style="color: #f7c873; font-weight: bold;">Rs. 1,500</h5>
+              <h5 class="price-display m-0" style="color: #f7c873; font-weight: bold;">Rs. 1,245</h5>
             </div>
             <a href="#" class="order-now-btn" onclick="openWhatsApp(this, event)" style="margin-top:12px;width:100%;background:#25D366;color:#fff;border:none;padding:10px;border-radius:6px;font-weight:700;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;font-size:.95rem;">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.399a7.682 7.682 0 0 0-10.86 0 7.636 7.636 0 0 0-2.012 5.087c0 1.636.425 3.235 1.232 4.65l-1.325 4.846 4.954-1.3a7.71 7.71 0 0 0 4.011 1.111h.001c4.254 0 7.715-3.46 7.715-7.714a7.675 7.675 0 0 0-2.253-5.462zM8.5 13.911a6.388 6.388 0 0 1-3.257-.887l-.234-.139-2.42.636.645-2.358-.153-.243a6.357 6.357 0 0 1-1.025-3.472C2.056 3.996 5.53 1.332 9.006 1.332c1.725 0 3.35.672 4.568 1.892 1.218 1.22 1.889 2.843 1.889 4.568 0 3.472-2.824 6.297-6.297 6.297z"/><path d="M11.854 9.692c-.17-.085-1.002-.495-1.157-.552-.155-.057-.268-.085-.38.085-.113.17-.438.552-.537.665-.099.113-.198.128-.368.043-.17-.085-.716-.264-1.364-.845-.505-.452-.846-1.003-.945-1.173-.099-.17-.01-.262.075-.347.075-.075.17-.198.255-.298.085-.099.113-.17.17-.283.057-.113.028-.212-.014-.298-.043-.085-.38-1.018-.521-1.396-.139-.368-.28-.318-.38-.323-.094-.005-.203-.005-.311-.005a.604.604 0 0 0-.437.203c-.155.17-.594.58-.594 1.414s.608 1.64.693 1.753c.085.113 1.196 1.828 2.898 2.544.405.17.72.271.966.347.408.128.78.11 1.074.068.328-.047 1.002-.41 1.144-.805.141-.395.141-.734.099-.805-.043-.07-.156-.113-.326-.198z"/></svg>
@@ -74,6 +83,10 @@
       if (e.target.classList.contains('weight-select')) {
         updatePrice(e.target);
       }
+      if (e.target.classList.contains('base-select')) {
+        var weightSel = e.target.closest('.cake-body').querySelector('.weight-select');
+        updatePrice(weightSel);
+      }
     });
 
     container.addEventListener('input', function(e) {
@@ -88,17 +101,20 @@
       const customContainer = cardBody.querySelector('.custom-weight-container');
       const customInput = cardBody.querySelector('.custom-weight-input');
       const priceDisplay = cardBody.querySelector('.price-display');
+      const baseSelect = cardBody.querySelector('.base-select');
+      const baseFlavor = baseSelect ? baseSelect.value : 'Pineapple';
+      const rate = baseRates[baseFlavor] || 995;
       
       let price = 0;
       
       if (selectElement.value === 'custom') {
         customContainer.style.display = 'block';
         const customVal = parseFloat(customInput.value) || 0;
-        price = customVal * ratePerPound;
+        price = customVal * rate;
       } else {
         customContainer.style.display = 'none';
         const val = parseFloat(selectElement.value) || 0;
-        price = val * ratePerPound;
+        price = val * rate;
       }
       
       priceDisplay.textContent = price > 0 ? `Rs. ${price.toLocaleString()}` : 'Rs. 0';
@@ -123,10 +139,13 @@
       var imgEl = btn.closest('.cake-card').querySelector('.cake-img');
       var imgLink = imgEl ? imgEl.src : '';
 
+      var base = btn.closest('.cake-card').querySelector('.base-select');
+      var baseFlavor = base ? base.options[base.selectedIndex].text : 'N/A';
       var msg = 'Hi Shireen Bakers!' + '\n\n' +
         'I would like to order this cake:' + '\n' +
         '*Category*: ' + cakeType + '\n' +
         '*Weight*: ' + weight + '\n' +
+        '*Base*: ' + baseFlavor + '\n' +
         '*Price*: ' + price + '\n\n' +
         '*Cake Image*: ' + imgLink + '\n\n' +
         'Please confirm availability and delivery.';
