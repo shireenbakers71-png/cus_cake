@@ -233,8 +233,66 @@
       orderBtn.innerHTML = whatsappSVG + ' Upload an image to Order';
     });
 
-    orderBtn.addEventListener('click', function() {
+    // Convert file to base64 string (without the data:... prefix)
+    function fileToBase64(file) {
+      return new Promise(function(resolve, reject) {
+        var reader = new FileReader();
+        reader.onload = function() { resolve(reader.result.split(',')[1]); };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Upload image and return a public URL
+    async function uploadImage(file) {
+      // Imgur anonymous upload (CORS-friendly, no signup needed)
+      try {
+        var base64 = await fileToBase64(file);
+        var r = await fetch('https://api.imgur.com/3/image', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Client-ID 546c25a59c58ad7'
+          },
+          body: base64
+        });
+        var d = await r.json();
+        if (d && d.data && d.data.link) return d.data.link;
+      } catch(e) { console.log('Imgur failed:', e); }
+      return '';
+    }
+
+    orderBtn.addEventListener('click', async function() {
       if (orderBtn.disabled) return;
+      if (!uploadedFile) return;
+
+      // Show uploading state
+      orderBtn.disabled = true;
+      orderBtn.innerHTML = whatsappSVG + ' Uploading image...';
+
+      var imgLink = await uploadImage(uploadedFile);
+
+      if (!imgLink) {
+        // Upload failed - still send WhatsApp but ask to manually share image
+        var weight2;
+        if (weightSel.value === 'custom') {
+          weight2 = customInput.value ? customInput.value + ' lbs' : 'custom';
+        } else {
+          weight2 = weightSel.options[weightSel.selectedIndex].text;
+        }
+        var price2 = priceDisplay.textContent;
+        var base2 = document.getElementById('base-select').value;
+        var msg2 = 'Hi Shireen Bakers!\n\n' +
+          'I would like to order a *Picture Cake* with my own design:\n' +
+          '*Weight*: ' + weight2 + '\n' +
+          '*Base*: ' + base2 + '\n' +
+          '*Price*: ' + price2 + '\n\n' +
+          '📸 *I will send my cake design image in the next message.*\n' +
+          'Please confirm availability and delivery.';
+        orderBtn.disabled = false;
+        orderBtn.innerHTML = whatsappSVG + ' Order Now';
+        window.location.href = 'https://wa.me/923314953666?text=' + encodeURIComponent(msg2);
+        return;
+      }
 
       var weight;
       if (weightSel.value === 'custom') {
@@ -250,9 +308,11 @@
         '*Weight*: ' + weight + '\n' +
         '*Base*: ' + base + '\n' +
         '*Price*: ' + price + '\n\n' +
-        'I will send my cake design image. Please confirm availability and delivery.';
+        (imgLink ? '*My Cake Design*: ' + imgLink + '\n\n' : '') +
+        'Please confirm availability and delivery.';
 
-      // Go directly to WhatsApp
+      orderBtn.disabled = false;
+      orderBtn.innerHTML = whatsappSVG + ' Order Now';
       window.location.href = 'https://wa.me/923314953666?text=' + encodeURIComponent(msg);
     });
   </script>

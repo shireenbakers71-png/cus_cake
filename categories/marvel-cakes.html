@@ -137,7 +137,8 @@
       var titleEl = document.querySelector('.page-title');
       if (titleEl) cakeType = titleEl.textContent.trim().replace(/\s+/g, ' ');
       var imgEl = btn.closest('.cake-card').querySelector('.cake-img');
-      var imgLink = imgEl ? imgEl.src : '';
+      var imgSrc = imgEl ? imgEl.getAttribute('src') : '';
+      var imgLink = imgSrc ? 'https://www.shireen-bakers.com/' + imgSrc.replace(/^\.\.\//, '') : '';
 
       var base = btn.closest('.cake-card').querySelector('.base-select');
       var baseFlavor = base ? base.options[base.selectedIndex].text : 'N/A';
