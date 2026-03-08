@@ -170,7 +170,7 @@
       if (titleEl) cakeType = titleEl.textContent.trim().replace(/\s+/g, ' ');
       var imgEl = btn.closest('.cake-card').querySelector('.cake-img');
       var imgSrc = imgEl ? imgEl.getAttribute('src') : '';
-      var imgLink = imgSrc ? 'https://www.shireen-bakers.com/' + imgSrc.replace(/^\.\.\//, '') : '';
+      var imgLink = imgSrc ? 'https://cus-cake.pages.dev/' + imgSrc.replace(/^\.\.\//, '') : '';
 
       var base = btn.closest('.cake-card').querySelector('.base-select');
       var baseFlavor = base ? base.options[base.selectedIndex].text : 'N/A';
