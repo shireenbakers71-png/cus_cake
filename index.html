@@ -468,9 +468,14 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var promoModal = new bootstrap.Modal(document.getElementById('promoPopup'));
-      // Show popup after splash screen finishes (or immediately if already seen)
-      var delay = sessionStorage.getItem('splashShown') ? 500 : 3500;
-      setTimeout(function() { promoModal.show(); }, delay);
+      // Only show popup once per session
+      if (!sessionStorage.getItem('promoShown')) {
+        var delay = sessionStorage.getItem('splashShown') ? 500 : 3500;
+        setTimeout(function() {
+          promoModal.show();
+          sessionStorage.setItem('promoShown', 'true');
+        }, delay);
+      }
     });
   </script>
 
