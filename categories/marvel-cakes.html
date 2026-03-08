@@ -32,7 +32,9 @@
   </div>
 
   <script>
-    const imageFiles = ["PhotoshopExtension_Image (1).webp","PhotoshopExtension_Image (2).webp","PhotoshopExtension_Image (3).webp","PhotoshopExtension_Image (4).webp","PhotoshopExtension_Image (63).webp","PhotoshopExtension_Image (64).webp","PhotoshopExtension_Image (65).webp","PhotoshopExtension_Image (66).webp","PhotoshopExtension_Image (67).webp","PhotoshopExtension_Image (72).webp","PhotoshopExtension_Image (73).webp","PhotoshopExtension_Image (74).webp","PhotoshopExtension_Image (75).webp","PhotoshopExtension_Image (76).webp","PhotoshopExtension_Image (77).webp","PhotoshopExtension_Image (78).webp","PhotoshopExtension_Image (79).webp","PhotoshopExtension_Image (80).webp","PhotoshopExtension_Image (81).webp","PhotoshopExtension_Image (82).webp","PhotoshopExtension_Image (83).webp","PhotoshopExtension_Image (84).webp","PhotoshopExtension_Image (85).webp","PhotoshopExtension_Image (86).webp","PhotoshopExtension_Image (87).webp","PhotoshopExtension_Image (88).webp","PhotoshopExtension_Image (89).webp","PhotoshopExtension_Image (90).webp","PhotoshopExtension_Image (91).webp","PhotoshopExtension_Image (92).webp","PhotoshopExtension_Image (93).webp","PhotoshopExtension_Image (94).webp","PhotoshopExtension_Image.webp"];;
+    const imageFiles = [
+      "PhotoshopExtension_Image(1).webp","PhotoshopExtension_Image(2).webp","PhotoshopExtension_Image(3).webp","PhotoshopExtension_Image(4).webp","PhotoshopExtension_Image(63).webp","PhotoshopExtension_Image(64).webp","PhotoshopExtension_Image(65).webp","PhotoshopExtension_Image(66).webp","PhotoshopExtension_Image(67).webp","PhotoshopExtension_Image(72).webp","PhotoshopExtension_Image(73).webp","PhotoshopExtension_Image(74).webp","PhotoshopExtension_Image(75).webp","PhotoshopExtension_Image(76).webp","PhotoshopExtension_Image(77).webp","PhotoshopExtension_Image(78).webp","PhotoshopExtension_Image(79).webp","PhotoshopExtension_Image(80).webp","PhotoshopExtension_Image(81).webp","PhotoshopExtension_Image(82).webp","PhotoshopExtension_Image(83).webp","PhotoshopExtension_Image(84).webp","PhotoshopExtension_Image(85).webp","PhotoshopExtension_Image(86).webp","PhotoshopExtension_Image(87).webp","PhotoshopExtension_Image(88).webp","PhotoshopExtension_Image(89).webp","PhotoshopExtension_Image(90).webp","PhotoshopExtension_Image(91).webp","PhotoshopExtension_Image(92).webp","PhotoshopExtension_Image(93).webp","PhotoshopExtension_Image(94).webp","PhotoshopExtension_Image.webp"
+    ];
 
     const container = document.getElementById('cakes-container');
     const baseRates = { 'Pineapple': 995, 'Chocolate': 1245, 'Red Velvet': 1495, '2 in 1 (Choc + Pine)': 1145, 'Custom': 1495 };
@@ -42,7 +44,7 @@
       col.className = 'col';
       col.innerHTML = `
         <div class="cake-card h-100 d-flex flex-column shadow-sm">
-          <img src="../images/marvel_cakes/${file}" alt="Marvel Cake" class="cake-img" loading="lazy">
+            <img src="../images/marvel_cakes/${file}" alt="Marvel Cake" class="cake-img" loading="lazy">
           <div class="cake-body d-flex flex-column flex-grow-1">
             <div class="mb-3">
               <label class="form-label" style="color: #6c6c6c; font-weight: 600;">Select Weight:</label>
