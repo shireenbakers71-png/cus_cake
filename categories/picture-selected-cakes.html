@@ -106,27 +106,11 @@
       <h2 class="page-title m-0">PICTURE <span>CAKES</span></h2>
     </div>
 
-    <p class="text-center text-muted mb-4" style="font-size:0.95rem;">Upload a picture of the cake design you want. Select your weight and we'll get back to you with details!</p>
+    <p class="text-center mb-4" style="font-size:1.35rem;font-weight:bold;color:#1c1c1c;">
+      Click <span style="color:#25D366;font-weight:bold;">Order on WhatsApp</span> and then <b>send</b> the picture of your selected cake on WhatsApp to order.
+    </p>
 
     <div class="upload-card">
-
-      <!-- Upload Area -->
-      <div class="upload-area" id="upload-area">
-        <input type="file" id="cake-image-input" accept="image/*">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-          <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
-        </svg>
-        <p><strong>Tap to upload</strong> your cake picture</p>
-        <p>PNG, JPG, WEBP supported</p>
-      </div>
-
-      <!-- Image Preview -->
-      <div id="preview-container">
-        <img id="preview-img" src="" alt="Cake Preview">
-        <br>
-        <button id="remove-img" type="button">Remove image</button>
-      </div>
 
       <!-- Weight Select -->
       <div class="mb-3 mt-4">
@@ -161,12 +145,12 @@
       </div>
 
       <!-- Order Now Button -->
-      <button class="order-now-btn" id="order-btn" disabled>
+      <button class="order-now-btn" id="order-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
           <path d="M13.601 2.399a7.682 7.682 0 0 0-10.86 0 7.636 7.636 0 0 0-2.012 5.087c0 1.636.425 3.235 1.232 4.65l-1.325 4.846 4.954-1.3a7.71 7.71 0 0 0 4.011 1.111h.001c4.254 0 7.715-3.46 7.715-7.714a7.675 7.675 0 0 0-2.253-5.462zM8.5 13.911a6.388 6.388 0 0 1-3.257-.887l-.234-.139-2.42.636.645-2.358-.153-.243a6.357 6.357 0 0 1-1.025-3.472C2.056 3.996 5.53 1.332 9.006 1.332c1.725 0 3.35.672 4.568 1.892 1.218 1.22 1.889 2.843 1.889 4.568 0 3.472-2.824 6.297-6.297 6.297z"/>
           <path d="M11.854 9.692c-.17-.085-1.002-.495-1.157-.552-.155-.057-.268-.085-.38.085-.113.17-.438.552-.537.665-.099.113-.198.128-.368.043-.17-.085-.716-.264-1.364-.845-.505-.452-.846-1.003-.945-1.173-.099-.17-.01-.262.075-.347.075-.075.17-.198.255-.298.085-.099.113-.17.17-.283.057-.113.028-.212-.014-.298-.043-.085-.38-1.018-.521-1.396-.139-.368-.28-.318-.38-.323-.094-.005-.203-.005-.311-.005a.604.604 0 0 0-.437.203c-.155.17-.594.58-.594 1.414s.608 1.64.693 1.753c.085.113 1.196 1.828 2.898 2.544.405.17.72.271.966.347.408.128.78.11 1.074.068.328-.047 1.002-.41 1.144-.805.141-.395.141-.734.099-.805-.043-.07-.156-.113-.326-.198z"/>
         </svg>
-        Upload an image to Order
+        Order on WhatsApp
       </button>
     </div>
   </div>
@@ -178,13 +162,6 @@
     const customInput = document.getElementById('custom-weight-input');
     const priceDisplay = document.getElementById('price-display');
     const orderBtn = document.getElementById('order-btn');
-    const imageInput = document.getElementById('cake-image-input');
-    const previewImg = document.getElementById('preview-img');
-    const previewContainer = document.getElementById('preview-container');
-    const uploadArea = document.getElementById('upload-area');
-    const removeBtn = document.getElementById('remove-img');
-
-    let uploadedFile = null;
 
     function updatePrice() {
       const baseSel = document.getElementById('base-select');
@@ -206,94 +183,7 @@
     customInput.addEventListener('input', updatePrice);
     document.getElementById('base-select').addEventListener('change', updatePrice);
 
-    const whatsappSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.399a7.682 7.682 0 0 0-10.86 0 7.636 7.636 0 0 0-2.012 5.087c0 1.636.425 3.235 1.232 4.65l-1.325 4.846 4.954-1.3a7.71 7.71 0 0 0 4.011 1.111h.001c4.254 0 7.715-3.46 7.715-7.714a7.675 7.675 0 0 0-2.253-5.462zM8.5 13.911a6.388 6.388 0 0 1-3.257-.887l-.234-.139-2.42.636.645-2.358-.153-.243a6.357 6.357 0 0 1-1.025-3.472C2.056 3.996 5.53 1.332 9.006 1.332c1.725 0 3.35.672 4.568 1.892 1.218 1.22 1.889 2.843 1.889 4.568 0 3.472-2.824 6.297-6.297 6.297z"/><path d="M11.854 9.692c-.17-.085-1.002-.495-1.157-.552-.155-.057-.268-.085-.38.085-.113.17-.438.552-.537.665-.099.113-.198.128-.368.043-.17-.085-.716-.264-1.364-.845-.505-.452-.846-1.003-.945-1.173-.099-.17-.01-.262.075-.347.075-.075.17-.198.255-.298.085-.099.113-.17.17-.283.057-.113.028-.212-.014-.298-.043-.085-.38-1.018-.521-1.396-.139-.368-.28-.318-.38-.323-.094-.005-.203-.005-.311-.005a.604.604 0 0 0-.437.203c-.155.17-.594.58-.594 1.414s.608 1.64.693 1.753c.085.113 1.196 1.828 2.898 2.544.405.17.72.271.966.347.408.128.78.11 1.074.068.328-.047 1.002-.41 1.144-.805.141-.395.141-.734.099-.805-.043-.07-.156-.113-.326-.198z"/></svg>';
-
-    imageInput.addEventListener('change', function() {
-      const file = this.files[0];
-      if (!file) return;
-      uploadedFile = file;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        previewImg.src = e.target.result;
-        previewContainer.style.display = 'block';
-        uploadArea.style.display = 'none';
-        orderBtn.disabled = false;
-        orderBtn.innerHTML = whatsappSVG + ' Order Now';
-      };
-      reader.readAsDataURL(file);
-    });
-
-    removeBtn.addEventListener('click', function() {
-      uploadedFile = null;
-      imageInput.value = '';
-      previewImg.src = '';
-      previewContainer.style.display = 'none';
-      uploadArea.style.display = 'block';
-      orderBtn.disabled = true;
-      orderBtn.innerHTML = whatsappSVG + ' Upload an image to Order';
-    });
-
-    // Convert file to base64 string (without the data:... prefix)
-    function fileToBase64(file) {
-      return new Promise(function(resolve, reject) {
-        var reader = new FileReader();
-        reader.onload = function() { resolve(reader.result.split(',')[1]); };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    // Upload image and return a public URL
-    async function uploadImage(file) {
-      // Imgur anonymous upload (CORS-friendly, no signup needed)
-      try {
-        var base64 = await fileToBase64(file);
-        var r = await fetch('https://api.imgur.com/3/image', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Client-ID 546c25a59c58ad7'
-          },
-          body: base64
-        });
-        var d = await r.json();
-        if (d && d.data && d.data.link) return d.data.link;
-      } catch(e) { console.log('Imgur failed:', e); }
-      return '';
-    }
-
-    orderBtn.addEventListener('click', async function() {
-      if (orderBtn.disabled) return;
-      if (!uploadedFile) return;
-
-      // Show uploading state
-      orderBtn.disabled = true;
-      orderBtn.innerHTML = whatsappSVG + ' Uploading image...';
-
-      var imgLink = await uploadImage(uploadedFile);
-
-      if (!imgLink) {
-        // Upload failed - still send WhatsApp but ask to manually share image
-        var weight2;
-        if (weightSel.value === 'custom') {
-          weight2 = customInput.value ? customInput.value + ' lbs' : 'custom';
-        } else {
-          weight2 = weightSel.options[weightSel.selectedIndex].text;
-        }
-        var price2 = priceDisplay.textContent;
-        var base2 = document.getElementById('base-select').value;
-        var msg2 = 'Hi Shireen Bakers!\n\n' +
-          'I would like to order a *Picture Cake* with my own design:\n' +
-          '*Weight*: ' + weight2 + '\n' +
-          '*Base*: ' + base2 + '\n' +
-          '*Price*: ' + price2 + '\n\n' +
-          '📸 *I will send my cake design image in the next message.*\n' +
-          'Please confirm availability and delivery.';
-        orderBtn.disabled = false;
-        orderBtn.innerHTML = whatsappSVG + ' Order Now';
-        window.location.href = 'https://wa.me/923314953666?text=' + encodeURIComponent(msg2);
-        return;
-      }
-
+    orderBtn.addEventListener('click', function() {
       var weight;
       if (weightSel.value === 'custom') {
         weight = customInput.value ? customInput.value + ' lbs' : 'custom';
@@ -302,17 +192,13 @@
       }
       var price = priceDisplay.textContent;
       var base = document.getElementById('base-select').value;
-
       var msg = 'Hi Shireen Bakers!\n\n' +
         'I would like to order a *Picture Cake* with my own design:\n' +
         '*Weight*: ' + weight + '\n' +
         '*Base*: ' + base + '\n' +
         '*Price*: ' + price + '\n\n' +
-        (imgLink ? '*My Cake Design*: ' + imgLink + '\n\n' : '') +
+        'After sending this message, please send your cake design image here in WhatsApp.' + '\n' +
         'Please confirm availability and delivery.';
-
-      orderBtn.disabled = false;
-      orderBtn.innerHTML = whatsappSVG + ' Order Now';
       window.location.href = 'https://wa.me/923314953666?text=' + encodeURIComponent(msg);
     });
   </script>
